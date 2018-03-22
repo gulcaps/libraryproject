@@ -1,0 +1,97 @@
+﻿@model SchoolLibrary0._1.Models.book
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>book</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Book Title
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.book_title)
+        </dd>
+
+        <dt>
+            Isbn
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.book_isbn)
+        </dd>
+
+        <dt>
+            Number
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.book_number)
+        </dd>
+
+        <dt>
+            Format
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.book_format)
+        </dd>
+
+        <dt>
+            Status
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.book_status)
+        </dd>
+
+        <dt>
+           Category
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.category_name)
+        </dd>
+
+        <dt>
+            Language
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.book_language)
+        </dd>
+
+        <dt>
+          Author Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.author.author_name)
+        </dd>
+
+        <dt>
+           Link
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.file.file_link)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

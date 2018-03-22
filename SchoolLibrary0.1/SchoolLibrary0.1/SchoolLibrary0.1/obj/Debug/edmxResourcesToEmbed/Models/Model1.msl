@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SchoolLibraryModelStoreContainer" CdmEntityContainer="SchoolLibraryEntities2">
+    <EntitySetMapping Name="accounts">
+      <EntityTypeMapping TypeName="SchoolLibraryModel.account">
+        <MappingFragment StoreEntitySet="account">
+          <ScalarProperty Name="account_id" ColumnName="account_id" />
+          <ScalarProperty Name="account_type" ColumnName="account_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="authors">
+      <EntityTypeMapping TypeName="SchoolLibraryModel.author">
+        <MappingFragment StoreEntitySet="author">
+          <ScalarProperty Name="author_id" ColumnName="author_id" />
+          <ScalarProperty Name="author_name" ColumnName="author_name" />
+          <ScalarProperty Name="author_surname" ColumnName="author_surname" />
+          <ScalarProperty Name="author_info" ColumnName="author_info" />
+          <ScalarProperty Name="file_id" ColumnName="file_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="books">
+      <EntityTypeMapping TypeName="SchoolLibraryModel.book">
+        <MappingFragment StoreEntitySet="book">
+          <ScalarProperty Name="book_id" ColumnName="book_id" />
+          <ScalarProperty Name="book_title" ColumnName="book_title" />
+          <ScalarProperty Name="book_isbn" ColumnName="book_isbn" />
+          <ScalarProperty Name="book_number" ColumnName="book_number" />
+          <ScalarProperty Name="book_format" ColumnName="book_format" />
+          <ScalarProperty Name="book_status" ColumnName="book_status" />
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+          <ScalarProperty Name="book_language" ColumnName="book_language" />
+          <ScalarProperty Name="file_id" ColumnName="file_id" />
+          <ScalarProperty Name="author_id" ColumnName="author_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="book_category">
+      <EntityTypeMapping TypeName="SchoolLibraryModel.book_category">
+        <MappingFragment StoreEntitySet="book_category">
+          <ScalarProperty Name="book_category_id" ColumnName="book_category_id" />
+          <ScalarProperty Name="book_id" ColumnName="book_id" />
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="book_loan">
+      <EntityTypeMapping TypeName="SchoolLibraryModel.book_loan">
+        <MappingFragment StoreEntitySet="book_loan">
+          <ScalarProperty Name="book_loan_id" ColumnName="book_loan_id" />
+          <ScalarProperty Name="book_id" ColumnName="book_id" />
+          <ScalarProperty Name="student_id" ColumnName="student_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="date_taken" ColumnName="date_taken" />
+          <ScalarProperty Name="date_return" ColumnName="date_return" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="categories">
+      <EntityTypeMapping TypeName="SchoolLibraryModel.category">
+        <MappingFragment StoreEntitySet="category">
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+          <ScalarProperty Name="category_name" ColumnName="category_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="files">
+      <EntityTypeMapping TypeName="SchoolLibraryModel.file">
+        <MappingFragment StoreEntitySet="file">
+          <ScalarProperty Name="file_id" ColumnName="file_id" />
+          <ScalarProperty Name="file_link" ColumnName="file_link" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="students">
+      <EntityTypeMapping TypeName="SchoolLibraryModel.student">
+        <MappingFragment StoreEntitySet="student">
+          <ScalarProperty Name="student_id" ColumnName="student_id" />
+          <ScalarProperty Name="student_username" ColumnName="student_username" />
+          <ScalarProperty Name="student_name" ColumnName="student_name" />
+          <ScalarProperty Name="student_surname" ColumnName="student_surname" />
+          <ScalarProperty Name="student_class" ColumnName="student_class" />
+          <ScalarProperty Name="student_number" ColumnName="student_number" />
+          <ScalarProperty Name="account_id" ColumnName="account_id" />
+          <ScalarProperty Name="verification_id" ColumnName="verification_id" />
+          <ScalarProperty Name="student_email" ColumnName="student_email" />
+          <ScalarProperty Name="file_id" ColumnName="file_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="SchoolLibraryModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="SchoolLibraryModel.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="user_username" ColumnName="user_username" />
+          <ScalarProperty Name="user_firstname" ColumnName="user_firstname" />
+          <ScalarProperty Name="user_surname" ColumnName="user_surname" />
+          <ScalarProperty Name="user_email" ColumnName="user_email" />
+          <ScalarProperty Name="file_id" ColumnName="file_id" />
+          <ScalarProperty Name="account_id" ColumnName="account_id" />
+          <ScalarProperty Name="verification_id" ColumnName="verification_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="verifications">
+      <EntityTypeMapping TypeName="SchoolLibraryModel.verification">
+        <MappingFragment StoreEntitySet="verification">
+          <ScalarProperty Name="verification_id" ColumnName="verification_id" />
+          <ScalarProperty Name="verification_code" ColumnName="verification_code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

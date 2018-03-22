@@ -1,0 +1,70 @@
+﻿@model IEnumerable<SchoolLibrary0._1.Models.user>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.user_username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.account.account_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.file.file_link)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.verification.verification_code)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_firstname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.account.account_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.file.file_link)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.verification.verification_code)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.user_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.user_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.user_id })
+        </td>
+    </tr>
+}
+
+</table>

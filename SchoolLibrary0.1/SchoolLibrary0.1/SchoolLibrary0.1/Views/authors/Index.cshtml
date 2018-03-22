@@ -1,0 +1,52 @@
+﻿@model IEnumerable<SchoolLibrary0._1.Models.author>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Author Name
+        </th>
+        <th>
+            Author Surname
+        </th>
+        <th>
+            Author Information
+        </th>
+        <th>
+            File Link
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.author_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.author_surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.author_info)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.file.file_link)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.author_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.author_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.author_id })
+        </td>
+    </tr>
+}
+
+</table>

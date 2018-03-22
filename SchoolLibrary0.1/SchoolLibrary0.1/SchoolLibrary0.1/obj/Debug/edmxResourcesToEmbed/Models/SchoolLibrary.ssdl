@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SchoolLibraryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="account">
+    <Key>
+      <PropertyRef Name="account_id" />
+    </Key>
+    <Property Name="account_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="account_type" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="author">
+    <Key>
+      <PropertyRef Name="author_id" />
+    </Key>
+    <Property Name="author_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="author_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="author_surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="author_info" Type="text" Nullable="false" />
+    <Property Name="file_id" Type="int" />
+  </EntityType>
+  <EntityType Name="book">
+    <Key>
+      <PropertyRef Name="book_id" />
+    </Key>
+    <Property Name="book_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="book_title" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="book_isbn" Type="nvarchar" MaxLength="1" />
+    <Property Name="book_number" Type="nvarchar" MaxLength="1" Nullable="false" />
+    <Property Name="book_format" Type="nvarchar" MaxLength="1" Nullable="false" />
+    <Property Name="book_status" Type="bit" Nullable="false" />
+    <Property Name="category_id" Type="int" Nullable="false" />
+    <Property Name="book_language" Type="nvarchar" MaxLength="1" Nullable="false" />
+    <Property Name="file_id" Type="int" />
+    <Property Name="author_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="book_category">
+    <Key>
+      <PropertyRef Name="book_category_id" />
+    </Key>
+    <Property Name="book_category_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="book_id" Type="int" />
+    <Property Name="category_id" Type="int" />
+  </EntityType>
+  <EntityType Name="book_loan">
+    <Key>
+      <PropertyRef Name="book_loan_id" />
+    </Key>
+    <Property Name="book_loan_id" Type="int" Nullable="false" />
+    <Property Name="book_id" Type="int" Nullable="false" />
+    <Property Name="student_id" Type="int" />
+    <Property Name="user_id" Type="int" />
+    <Property Name="date_taken" Type="datetime" Nullable="false" />
+    <Property Name="date_return" Type="datetime" />
+  </EntityType>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="category_id" />
+    </Key>
+    <Property Name="category_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="category_name" Type="nvarchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="file">
+    <Key>
+      <PropertyRef Name="file_id" />
+    </Key>
+    <Property Name="file_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="file_link" Type="varchar" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="student">
+    <Key>
+      <PropertyRef Name="student_id" />
+    </Key>
+    <Property Name="student_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="student_username" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="student_name" Type="nvarchar" MaxLength="1" Nullable="false" />
+    <Property Name="student_surname" Type="nvarchar" MaxLength="1" Nullable="false" />
+    <Property Name="student_class" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="student_number" Type="int" Nullable="false" />
+    <Property Name="account_id" Type="int" Nullable="false" />
+    <Property Name="verification_id" Type="int" />
+    <Property Name="student_email" Type="nvarchar" MaxLength="1" Nullable="false" />
+    <Property Name="file_id" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="user_firstname" Type="nvarchar" MaxLength="1" Nullable="false" />
+    <Property Name="user_surname" Type="nvarchar" MaxLength="1" Nullable="false" />
+    <Property Name="user_email" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="file_id" Type="int" />
+    <Property Name="account_id" Type="int" Nullable="false" />
+    <Property Name="verification_id" Type="int" />
+  </EntityType>
+  <EntityType Name="verification">
+    <Key>
+      <PropertyRef Name="verification_id" />
+    </Key>
+    <Property Name="verification_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="verification_code" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_author_file">
+    <End Role="file" Type="Self.file" Multiplicity="0..1" />
+    <End Role="author" Type="Self.author" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="file">
+        <PropertyRef Name="file_id" />
+      </Principal>
+      <Dependent Role="author">
+        <PropertyRef Name="file_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_book_author">
+    <End Role="author" Type="Self.author" Multiplicity="1" />
+    <End Role="book" Type="Self.book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="author">
+        <PropertyRef Name="author_id" />
+      </Principal>
+      <Dependent Role="book">
+        <PropertyRef Name="author_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_book_category">
+    <End Role="book" Type="Self.book" Multiplicity="0..1" />
+    <End Role="book_category" Type="Self.book_category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="book">
+        <PropertyRef Name="book_id" />
+      </Principal>
+      <Dependent Role="book_category">
+        <PropertyRef Name="book_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_book_file">
+    <End Role="file" Type="Self.file" Multiplicity="0..1" />
+    <End Role="book" Type="Self.book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="file">
+        <PropertyRef Name="file_id" />
+      </Principal>
+      <Dependent Role="book">
+        <PropertyRef Name="file_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_book_loan_book">
+    <End Role="book" Type="Self.book" Multiplicity="1" />
+    <End Role="book_loan" Type="Self.book_loan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="book">
+        <PropertyRef Name="book_id" />
+      </Principal>
+      <Dependent Role="book_loan">
+        <PropertyRef Name="book_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_book_loan_student">
+    <End Role="student" Type="Self.student" Multiplicity="0..1" />
+    <End Role="book_loan" Type="Self.book_loan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="student">
+        <PropertyRef Name="student_id" />
+      </Principal>
+      <Dependent Role="book_loan">
+        <PropertyRef Name="student_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_book_loan_user">
+    <End Role="user" Type="Self.user" Multiplicity="0..1" />
+    <End Role="book_loan" Type="Self.book_loan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="book_loan">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_category_book">
+    <End Role="category" Type="Self.category" Multiplicity="0..1" />
+    <End Role="book_category" Type="Self.book_category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="book_category">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_student_account">
+    <End Role="account" Type="Self.account" Multiplicity="1" />
+    <End Role="student" Type="Self.student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="account">
+        <PropertyRef Name="account_id" />
+      </Principal>
+      <Dependent Role="student">
+        <PropertyRef Name="account_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_student_student">
+    <End Role="file" Type="Self.file" Multiplicity="0..1" />
+    <End Role="student" Type="Self.student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="file">
+        <PropertyRef Name="file_id" />
+      </Principal>
+      <Dependent Role="student">
+        <PropertyRef Name="file_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_student_verification">
+    <End Role="verification" Type="Self.verification" Multiplicity="0..1" />
+    <End Role="student" Type="Self.student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="verification">
+        <PropertyRef Name="verification_id" />
+      </Principal>
+      <Dependent Role="student">
+        <PropertyRef Name="verification_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_account">
+    <End Role="account" Type="Self.account" Multiplicity="1" />
+    <End Role="user" Type="Self.user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="account">
+        <PropertyRef Name="account_id" />
+      </Principal>
+      <Dependent Role="user">
+        <PropertyRef Name="account_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_file">
+    <End Role="file" Type="Self.file" Multiplicity="0..1" />
+    <End Role="user" Type="Self.user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="file">
+        <PropertyRef Name="file_id" />
+      </Principal>
+      <Dependent Role="user">
+        <PropertyRef Name="file_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_verification">
+    <End Role="verification" Type="Self.verification" Multiplicity="0..1" />
+    <End Role="user" Type="Self.user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="verification">
+        <PropertyRef Name="verification_id" />
+      </Principal>
+      <Dependent Role="user">
+        <PropertyRef Name="verification_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SchoolLibraryModelStoreContainer">
+    <EntitySet Name="account" EntityType="Self.account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="author" EntityType="Self.author" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="book" EntityType="Self.book" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="book_category" EntityType="Self.book_category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="book_loan" EntityType="Self.book_loan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="file" EntityType="Self.file" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="student" EntityType="Self.student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="verification" EntityType="Self.verification" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_author_file" Association="Self.FK_author_file">
+      <End Role="file" EntitySet="file" />
+      <End Role="author" EntitySet="author" />
+    </AssociationSet>
+    <AssociationSet Name="FK_book_author" Association="Self.FK_book_author">
+      <End Role="author" EntitySet="author" />
+      <End Role="book" EntitySet="book" />
+    </AssociationSet>
+    <AssociationSet Name="FK_book_category" Association="Self.FK_book_category">
+      <End Role="book" EntitySet="book" />
+      <End Role="book_category" EntitySet="book_category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_book_file" Association="Self.FK_book_file">
+      <End Role="file" EntitySet="file" />
+      <End Role="book" EntitySet="book" />
+    </AssociationSet>
+    <AssociationSet Name="FK_book_loan_book" Association="Self.FK_book_loan_book">
+      <End Role="book" EntitySet="book" />
+      <End Role="book_loan" EntitySet="book_loan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_book_loan_student" Association="Self.FK_book_loan_student">
+      <End Role="student" EntitySet="student" />
+      <End Role="book_loan" EntitySet="book_loan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_book_loan_user" Association="Self.FK_book_loan_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="book_loan" EntitySet="book_loan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_category_book" Association="Self.FK_category_book">
+      <End Role="category" EntitySet="category" />
+      <End Role="book_category" EntitySet="book_category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_student_account" Association="Self.FK_student_account">
+      <End Role="account" EntitySet="account" />
+      <End Role="student" EntitySet="student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_student_student" Association="Self.FK_student_student">
+      <End Role="file" EntitySet="file" />
+      <End Role="student" EntitySet="student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_student_verification" Association="Self.FK_student_verification">
+      <End Role="verification" EntitySet="verification" />
+      <End Role="student" EntitySet="student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_account" Association="Self.FK_user_account">
+      <End Role="account" EntitySet="account" />
+      <End Role="user" EntitySet="user" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_file" Association="Self.FK_user_file">
+      <End Role="file" EntitySet="file" />
+      <End Role="user" EntitySet="user" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_verification" Association="Self.FK_user_verification">
+      <End Role="verification" EntitySet="verification" />
+      <End Role="user" EntitySet="user" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

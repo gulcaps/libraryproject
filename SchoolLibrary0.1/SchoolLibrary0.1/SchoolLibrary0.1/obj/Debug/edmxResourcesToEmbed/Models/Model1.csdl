@@ -1,0 +1,378 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SchoolLibraryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="account">
+    <Key>
+      <PropertyRef Name="account_id" />
+    </Key>
+    <Property Name="account_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="account_type" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="students" Relationship="Self.FK_student_account" FromRole="account" ToRole="student" />
+    <NavigationProperty Name="users" Relationship="Self.FK_user_account" FromRole="account" ToRole="user" />
+  </EntityType>
+  <EntityType Name="author">
+    <Key>
+      <PropertyRef Name="author_id" />
+    </Key>
+    <Property Name="author_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="author_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="author_surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="author_info" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="file_id" Type="Int32" />
+    <NavigationProperty Name="file" Relationship="Self.FK_author_file" FromRole="author" ToRole="file" />
+    <NavigationProperty Name="books" Relationship="Self.FK_book_author" FromRole="author" ToRole="book" />
+  </EntityType>
+  <EntityType Name="book">
+    <Key>
+      <PropertyRef Name="book_id" />
+    </Key>
+    <Property Name="book_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="book_title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="book_isbn" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="book_number" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="book_format" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="book_status" Type="Boolean" Nullable="false" />
+    <Property Name="category_id" Type="Int32" Nullable="false" />
+    <Property Name="book_language" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="file_id" Type="Int32" />
+    <Property Name="author_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="author" Relationship="Self.FK_book_author" FromRole="book" ToRole="author" />
+    <NavigationProperty Name="book_category" Relationship="Self.FK_book_category" FromRole="book" ToRole="book_category" />
+    <NavigationProperty Name="file" Relationship="Self.FK_book_file" FromRole="book" ToRole="file" />
+    <NavigationProperty Name="book_loan" Relationship="Self.FK_book_loan_book" FromRole="book" ToRole="book_loan" />
+  </EntityType>
+  <EntityType Name="book_category">
+    <Key>
+      <PropertyRef Name="book_category_id" />
+    </Key>
+    <Property Name="book_category_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="book_id" Type="Int32" />
+    <Property Name="category_id" Type="Int32" />
+    <NavigationProperty Name="book" Relationship="Self.FK_book_category" FromRole="book_category" ToRole="book" />
+    <NavigationProperty Name="category" Relationship="Self.FK_category_book" FromRole="book_category" ToRole="category" />
+  </EntityType>
+  <EntityType Name="book_loan">
+    <Key>
+      <PropertyRef Name="book_loan_id" />
+    </Key>
+    <Property Name="book_loan_id" Type="Int32" Nullable="false" />
+    <Property Name="book_id" Type="Int32" Nullable="false" />
+    <Property Name="student_id" Type="Int32" />
+    <Property Name="user_id" Type="Int32" />
+    <Property Name="date_taken" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="date_return" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="book" Relationship="Self.FK_book_loan_book" FromRole="book_loan" ToRole="book" />
+    <NavigationProperty Name="student" Relationship="Self.FK_book_loan_student" FromRole="book_loan" ToRole="student" />
+    <NavigationProperty Name="user" Relationship="Self.FK_book_loan_user" FromRole="book_loan" ToRole="user" />
+  </EntityType>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="category_id" />
+    </Key>
+    <Property Name="category_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="category_name" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="book_category" Relationship="Self.FK_category_book" FromRole="category" ToRole="book_category" />
+  </EntityType>
+  <EntityType Name="file">
+    <Key>
+      <PropertyRef Name="file_id" />
+    </Key>
+    <Property Name="file_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="file_link" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="authors" Relationship="Self.FK_author_file" FromRole="file" ToRole="author" />
+    <NavigationProperty Name="books" Relationship="Self.FK_book_file" FromRole="file" ToRole="book" />
+    <NavigationProperty Name="students" Relationship="Self.FK_student_student" FromRole="file" ToRole="student" />
+    <NavigationProperty Name="users" Relationship="Self.FK_user_file" FromRole="file" ToRole="user" />
+  </EntityType>
+  <EntityType Name="student">
+    <Key>
+      <PropertyRef Name="student_id" />
+    </Key>
+    <Property Name="student_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="student_username" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="student_name" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="student_surname" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="student_class" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="student_number" Type="Int32" Nullable="false" />
+    <Property Name="account_id" Type="Int32" Nullable="false" />
+    <Property Name="verification_id" Type="Int32" />
+    <Property Name="student_email" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="file_id" Type="Int32" />
+    <NavigationProperty Name="account" Relationship="Self.FK_student_account" FromRole="student" ToRole="account" />
+    <NavigationProperty Name="book_loan" Relationship="Self.FK_book_loan_student" FromRole="student" ToRole="book_loan" />
+    <NavigationProperty Name="file" Relationship="Self.FK_student_student" FromRole="student" ToRole="file" />
+    <NavigationProperty Name="verification" Relationship="Self.FK_student_verification" FromRole="student" ToRole="verification" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="user_firstname" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="user_surname" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="user_email" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="file_id" Type="Int32" />
+    <Property Name="account_id" Type="Int32" Nullable="false" />
+    <Property Name="verification_id" Type="Int32" />
+    <NavigationProperty Name="account" Relationship="Self.FK_user_account" FromRole="user" ToRole="account" />
+    <NavigationProperty Name="book_loan" Relationship="Self.FK_book_loan_user" FromRole="user" ToRole="book_loan" />
+    <NavigationProperty Name="file" Relationship="Self.FK_user_file" FromRole="user" ToRole="file" />
+    <NavigationProperty Name="verification" Relationship="Self.FK_user_verification" FromRole="user" ToRole="verification" />
+  </EntityType>
+  <EntityType Name="verification">
+    <Key>
+      <PropertyRef Name="verification_id" />
+    </Key>
+    <Property Name="verification_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="verification_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="students" Relationship="Self.FK_student_verification" FromRole="verification" ToRole="student" />
+    <NavigationProperty Name="users" Relationship="Self.FK_user_verification" FromRole="verification" ToRole="user" />
+  </EntityType>
+  <Association Name="FK_student_account">
+    <End Role="account" Type="Self.account" Multiplicity="1" />
+    <End Role="student" Type="Self.student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="account">
+        <PropertyRef Name="account_id" />
+      </Principal>
+      <Dependent Role="student">
+        <PropertyRef Name="account_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_account">
+    <End Role="account" Type="Self.account" Multiplicity="1" />
+    <End Role="user" Type="Self.user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="account">
+        <PropertyRef Name="account_id" />
+      </Principal>
+      <Dependent Role="user">
+        <PropertyRef Name="account_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_author_file">
+    <End Role="file" Type="Self.file" Multiplicity="0..1" />
+    <End Role="author" Type="Self.author" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="file">
+        <PropertyRef Name="file_id" />
+      </Principal>
+      <Dependent Role="author">
+        <PropertyRef Name="file_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_book_author">
+    <End Role="author" Type="Self.author" Multiplicity="1" />
+    <End Role="book" Type="Self.book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="author">
+        <PropertyRef Name="author_id" />
+      </Principal>
+      <Dependent Role="book">
+        <PropertyRef Name="author_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_book_category">
+    <End Role="book" Type="Self.book" Multiplicity="0..1" />
+    <End Role="book_category" Type="Self.book_category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="book">
+        <PropertyRef Name="book_id" />
+      </Principal>
+      <Dependent Role="book_category">
+        <PropertyRef Name="book_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_book_file">
+    <End Role="file" Type="Self.file" Multiplicity="0..1" />
+    <End Role="book" Type="Self.book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="file">
+        <PropertyRef Name="file_id" />
+      </Principal>
+      <Dependent Role="book">
+        <PropertyRef Name="file_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_book_loan_book">
+    <End Role="book" Type="Self.book" Multiplicity="1" />
+    <End Role="book_loan" Type="Self.book_loan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="book">
+        <PropertyRef Name="book_id" />
+      </Principal>
+      <Dependent Role="book_loan">
+        <PropertyRef Name="book_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_category_book">
+    <End Role="category" Type="Self.category" Multiplicity="0..1" />
+    <End Role="book_category" Type="Self.book_category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="book_category">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_book_loan_student">
+    <End Role="student" Type="Self.student" Multiplicity="0..1" />
+    <End Role="book_loan" Type="Self.book_loan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="student">
+        <PropertyRef Name="student_id" />
+      </Principal>
+      <Dependent Role="book_loan">
+        <PropertyRef Name="student_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_book_loan_user">
+    <End Role="user" Type="Self.user" Multiplicity="0..1" />
+    <End Role="book_loan" Type="Self.book_loan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="book_loan">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_student_student">
+    <End Role="file" Type="Self.file" Multiplicity="0..1" />
+    <End Role="student" Type="Self.student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="file">
+        <PropertyRef Name="file_id" />
+      </Principal>
+      <Dependent Role="student">
+        <PropertyRef Name="file_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_file">
+    <End Role="file" Type="Self.file" Multiplicity="0..1" />
+    <End Role="user" Type="Self.user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="file">
+        <PropertyRef Name="file_id" />
+      </Principal>
+      <Dependent Role="user">
+        <PropertyRef Name="file_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_student_verification">
+    <End Role="verification" Type="Self.verification" Multiplicity="0..1" />
+    <End Role="student" Type="Self.student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="verification">
+        <PropertyRef Name="verification_id" />
+      </Principal>
+      <Dependent Role="student">
+        <PropertyRef Name="verification_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_verification">
+    <End Role="verification" Type="Self.verification" Multiplicity="0..1" />
+    <End Role="user" Type="Self.user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="verification">
+        <PropertyRef Name="verification_id" />
+      </Principal>
+      <Dependent Role="user">
+        <PropertyRef Name="verification_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SchoolLibraryEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="accounts" EntityType="Self.account" />
+    <EntitySet Name="authors" EntityType="Self.author" />
+    <EntitySet Name="books" EntityType="Self.book" />
+    <EntitySet Name="book_category" EntityType="Self.book_category" />
+    <EntitySet Name="book_loan" EntityType="Self.book_loan" />
+    <EntitySet Name="categories" EntityType="Self.category" />
+    <EntitySet Name="files" EntityType="Self.file" />
+    <EntitySet Name="students" EntityType="Self.student" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="users" EntityType="Self.user" />
+    <EntitySet Name="verifications" EntityType="Self.verification" />
+    <AssociationSet Name="FK_student_account" Association="Self.FK_student_account">
+      <End Role="account" EntitySet="accounts" />
+      <End Role="student" EntitySet="students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_account" Association="Self.FK_user_account">
+      <End Role="account" EntitySet="accounts" />
+      <End Role="user" EntitySet="users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_author_file" Association="Self.FK_author_file">
+      <End Role="file" EntitySet="files" />
+      <End Role="author" EntitySet="authors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_book_author" Association="Self.FK_book_author">
+      <End Role="author" EntitySet="authors" />
+      <End Role="book" EntitySet="books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_book_category" Association="Self.FK_book_category">
+      <End Role="book" EntitySet="books" />
+      <End Role="book_category" EntitySet="book_category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_book_file" Association="Self.FK_book_file">
+      <End Role="file" EntitySet="files" />
+      <End Role="book" EntitySet="books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_book_loan_book" Association="Self.FK_book_loan_book">
+      <End Role="book" EntitySet="books" />
+      <End Role="book_loan" EntitySet="book_loan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_category_book" Association="Self.FK_category_book">
+      <End Role="category" EntitySet="categories" />
+      <End Role="book_category" EntitySet="book_category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_book_loan_student" Association="Self.FK_book_loan_student">
+      <End Role="student" EntitySet="students" />
+      <End Role="book_loan" EntitySet="book_loan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_book_loan_user" Association="Self.FK_book_loan_user">
+      <End Role="user" EntitySet="users" />
+      <End Role="book_loan" EntitySet="book_loan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_student_student" Association="Self.FK_student_student">
+      <End Role="file" EntitySet="files" />
+      <End Role="student" EntitySet="students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_file" Association="Self.FK_user_file">
+      <End Role="file" EntitySet="files" />
+      <End Role="user" EntitySet="users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_student_verification" Association="Self.FK_student_verification">
+      <End Role="verification" EntitySet="verifications" />
+      <End Role="student" EntitySet="students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_verification" Association="Self.FK_user_verification">
+      <End Role="verification" EntitySet="verifications" />
+      <End Role="user" EntitySet="users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

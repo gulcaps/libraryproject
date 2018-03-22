@@ -1,0 +1,82 @@
+﻿@model IEnumerable<SchoolLibrary0._1.Models.book>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.book_title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.book_isbn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.book_number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.book_format)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.book_status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.category_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.book_language)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.author.author_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.file.file_link)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.book_title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.book_isbn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.book_number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.book_format)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.book_status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.category_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.book_language)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.author.author_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.file.file_link)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.book_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.book_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.book_id })
+        </td>
+    </tr>
+}
+
+</table>
